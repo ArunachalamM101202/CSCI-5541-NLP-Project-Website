@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html lang=" en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NLP Class Project | Fall 2024 CSCI 5541 | University of Minnesota</title>
+
+  <link rel="stylesheet" href="./files/bulma.min.css" />
+
+  <link rel="stylesheet" href="./files/styles.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com/">
+  <link href="./files/css2" rel="stylesheet">
+  <link href="./files/css" rel="stylesheet">
+
+
+  <base href="." target="_blank"></head>
+
+
+<body>
+  <div>
+    <div class="wrapper">
+      <h1 style="font-family: &#39;Lato&#39;, sans-serif;">Multimodal Sarcasm Detection Using Vision-Language Models</h1>
+      <h4 style="font-family: &#39;Lato&#39;, sans-serif; ">Spring 2025 CSCI 5541 NLP: Class Project - University of Minnesota, Twin Cities</h4>
+      <h4 style="font-family: &#39;Lato&#39;, sans-serif; ">404 Not Found</h4>
+
+      <div class="authors-wrapper">
+        
+        <div class="author-container">
+          <div class="author-image">
+                        
+              <img src="../csci5541_webtemplate/files/images/arun.png" alt="Arunachalam Manikandan">
+            
+            
+          </div>
+          <p>
+                        
+              Arunachalam Manikandan
+            
+          </p>
+        </div>
+        
+        <div class="author-container">
+          <div class="author-image">
+            
+            <img src="../csci5541_webtemplate/files/images/erina.png" alt="Erina Karati">
+            
+          </div>
+          <p>
+            
+            Erina Karati
+            
+          </p>
+        </div>
+        
+        <div class="author-container">
+          <div class="author-image">
+            
+              <img src="../csci5541_webtemplate/files/images/hahnemann.png" alt="Hahnemann Ortiz">            
+            
+          </div>
+          <p>
+            Hahnemann Ortiz
+          </p>
+        </div>
+        
+        <div class="author-container">
+          <div class="author-image">
+                        
+              <img src="../csci5541_webtemplate/files/images/saeid.png" alt="Saeid Cheshmi"> 
+            
+          </div>
+          <p>
+            Saeid Cheshmi
+          </p>
+        </div>
+        
+      </div>
+
+      <br/>
+
+      <div class="authors-wrapper">
+        <div class="publication-links">
+          <!-- Github link -->
+          <span class="link-block">
+            <a
+              href=""
+              target="_blank"
+              class="external-link button is-normal is-rounded is-dark is-outlined"
+            >
+            <span>Final Report</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a
+              href=""
+              target="_blank"
+              class="external-link button is-normal is-rounded is-dark is-outlined"
+            >
+            <span>Code</span>
+            </a>
+          </span>      
+          <span class="link-block">
+            <a
+              href=""
+              target="_blank"
+              class="external-link button is-normal is-rounded is-dark is-outlined"
+            >
+            <span>Model Weights</span>
+            </a>
+          </span>              
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+
+
+
+
+  
+  
+
+
+  <div class="wrapper">
+    <hr>
+    
+    <h2 id="abstract">Abstract</h2>
+
+<p style="text-align: justify;">Sarcasm is a sophisticated form of figurative language where the intended meaning contrasts sharply with the literal expression, is a pervasive element of human communication, especially in online contexts. Accurately detecting sarcasm is crucial for understanding online communication and improving applications like sentiment analysis, but traditional text-only methods fail because sarcasm often relies on the complex interplay between text and visual cues.
+  We propose fine-tuning a Vision-Language Model on multimodal sarcasm datasets, incorporating Chain-of-Thought reasoning and attention analysis to enhance both detection accuracy and model interpretability.
+</p>
+
+<hr>
+
+<h2 id="teaser">Teaser Figure</h2>
+
+<p>A figure that conveys the main idea behind the project or the main application being addressed. This figure is from <a href="https://arxiv.org/pdf/2210.07469">StyLEx</a>.</p>
+
+<p class="sys-img"><img src="./files/teaser.png" alt="imgname"></p>
+
+
+<h3 id="the-timeline-and-the-highlights">Any subsection</h3>
+
+<p>If you need to explain more about your figure</p>
+
+<hr>
+
+<h2 id="introduction">Introduction / Background / Motivation</h2>
+
+<p>
+<b>What did you try to do? What problem did you try to solve? Articulate your objectives using absolutely no jargon.</b>
+</p>
+<p style="text-align: justify;">
+  Sarcasm represents a sophisticated form of communication where the intended meaning often directly contradicts the literal interpretation of the words used. In contemporary digital environments, particularly social media, sarcasm is frequently conveyed not just through text but through a combination of textual statements and accompanying visual content, such as images or memes. This interplay between modalities presents a significant challenge for computational systems attempting to understand human communication. Traditional approaches to automated sarcasm detection have predominantly focused on analyzing text alone, often proving insufficient as they fail to capture the crucial contextual cues provided by visual elements. For instance, a statement like "Having a wonderful time" might be interpreted literally by a text-only system, whereas an accompanying image depicting a frustrating situation would reveal the statement's sarcastic nature to a human observer. This limitation hinders the accuracy of downstream applications like sentiment analysis, opinion mining, and social media monitoring, which rely on correctly interpreting user intent.
+</p>
+<p style="text-align: justify;">
+  Addressing this gap requires systems capable of processing and integrating information from multiple sources simultaneously. Our research focuses on tackling the problem of multimodal sarcasm detection, specifically targeting instances where understanding the relationship between text and associated images is essential for correct interpretation. The core objective is to develop a computational model that can effectively discern sarcastic intent by jointly analyzing visual and textual inputs. To achieve this, we leverage the capabilities of advanced Vision-Language Models (VLMs), such as LLaVA and Qwen2-VL. These models are inherently designed to understand the complex correlations between language and visual data, making them well-suited for identifying the subtle incongruities that often characterize multimodal sarcasm.
+</p>
+<p style="text-align: justify;">
+  The primary goal of this work is to improve the accuracy and robustness of automated sarcasm detection in multimodal contexts. We achieve this by fine-tuning pre-trained VLMs on datasets specifically curated for text-image sarcasm. By exposing these models to numerous examples of sarcastic and non-sarcastic text-image pairs, they learn to identify the nuanced patterns indicative of sarcasm arising from the combination of modalities. Furthermore, beyond merely classifying content, we aim to enhance the interpretability of the detection process. Exploring techniques that can potentially elucidate *why* the model identifies a given instance as sarcastic contributes to building more transparent and trustworthy AI systems for understanding complex human communication nuances like sarcasm.
+</p>
+
+<p>
+<b>How is it done today, and what are the limits of current practice?</b>
+</p>
+<p style="text-align: justify;">
+  Current approaches to sarcasm detection increasingly recognize the limitations of analyzing text alone and have shifted towards multimodal methods, primarily integrating textual and visual information. State-of-the-art techniques often leverage powerful Vision-Language Models (VLMs) or adapt pre-trained models like CLIP. For instance, methods such as Multi-View CLIP (Qin et al., 2023) focus on extracting and fusing features from text, images, and their interactions at multiple granularities, while others like InterCLIP-MEP (Chen et al., 2024) embed cross-modal interactions directly within the model's encoders to enhance feature representation and use memory components for improved robustness. Researchers are also actively improving datasets, such as the development of MMSD2.0 (Qin et al., 2023) to mitigate spurious cues and SarcNet (Yue et al., 2024) to provide finer-grained, modality-specific annotations and multilingual support, enabling more rigorous evaluation.
+</p>
+<p style="text-align: justify;">
+  Despite these advancements, significant limitations persist in current practices. Datasets, even improved ones like MMSD2.0, can still contain biases or lack the diversity needed for robust generalization (Chen et al., 2024; Qin et al., 2023). Effectively fusing information from different modalities to capture the often subtle incongruity central to sarcasm remains a complex challenge, with various fusion strategies yielding different results. Perhaps most critically, many current high-performing models function largely as "black boxes," achieving strong classification accuracy but offering little insight into *why* a particular text-image pair is deemed sarcastic. This lack of interpretability hinders trust and deeper understanding, a gap our proposed approach using Chain-of-Thought reasoning aims to address. Furthermore, ensuring models generalize well across different domains, languages (as SarcNet begins to explore), and types of sarcasm continues to be an area requiring further research.
+<p>
+
+<p>
+<b>Who cares? If you are successful, what difference will it make?</b>
+</p>
+<p style="text-align: justify;">
+  Successfully developing a robust and interpretable multimodal sarcasm detection system carries significant implications across various domains. Businesses and market researchers would greatly benefit from more accurate sentiment analysis of customer feedback and social media trends, preventing misinterpretations of sarcastic comments that could skew understanding of brand perception or product reception. Social media platforms could improve content moderation and better understand user interactions, potentially identifying subtle forms of negative or harmful communication veiled in sarcasm. Furthermore, success in this area would advance human-computer interaction, enabling AI assistants and chatbots to grasp nuanced language more effectively, leading to more natural and engaging conversations. Ultimately, achieving accurate and explainable sarcasm detection would contribute to a deeper computational understanding of complex human language, fostering more reliable AI applications that interact with or analyze online communication.
+</p>
+
+<hr>
+
+<h2 id="approach">Approach</h2>
+
+<p>
+<b>What did you do exactly? How did you solve the problem? Why did you think it would be successful? Is anything new in your approach?</b>
+</p>
+
+<p>
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</p>
+
+<p>
+<b>What problems did you anticipate? What problems did you encounter? Did the very first thing you tried work?</b>
+</p>
+
+<p>
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+</p>
+
+<hr>
+    
+<h2 id="results">Results</h2>
+<p>
+<b>How did you measure success? What experiments were used? What were the results, both quantitative and qualitative? Did you succeed? Did you fail? Why?</b>
+</p>
+<p>
+Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+</p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Experiment</strong></th>
+      <th style="text-align: center">1</th>
+      <th style="text-align: center">2</th>
+      <th style="text-align: center">3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>Sentence</strong></td>
+      <td style="text-align: center">Example 1</td>
+      <td style="text-align: center">Example 2</td>
+      <td style="text-align: center">Example 3</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Errors</strong></td>
+      <td style="text-align: center">error A, error B, error C</td>
+      <td style="text-align: center">error C</td>
+      <td style="text-align: center">error B</td>
+    </tr>
+  </tbody>
+  <caption>Table 1. This is Table 1's caption</caption>
+</table>
+<br>
+<div style="text-align: center;">
+<img style="height: 300px;" alt="" src="./files/results.png">
+</div>
+<br><br>
+
+<hr>
+
+
+
+<h2 id="conclusion">Conclustion and Future Work</h2>
+<p>
+
+  How easily are your results able to be reproduced by others?
+  Did your dataset or annotation affect other people's choice of research or development projects to undertake?
+  Does your work have potential harm or risk to our society? What kinds? If so, how can you address them?
+  What limitations does your model have? How can you extend your work for future research?</p>
+
+
+<hr>
+
+
+  </div>
+  
+
+
+</body></html>
