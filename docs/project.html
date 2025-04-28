@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multimodal Sarcasm Detection</title>
+  <style>
+    :root {
+      --apple-black: #000000;
+      --apple-white: #ffffff;
+      --apple-gray-100: #f5f5f7;
+      --apple-gray-200: #e8e8ed;
+      --apple-gray-300: #d2d2d7;
+      --apple-gray-400: #86868b;
+      --apple-blue: #0071e3;
+      --apple-blue-dark: #0051a2;
+      --apple-accent: #06c;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    body {
+      background-color: var(--apple-black);
+      color: var(--apple-white);
+      line-height: 1.47059;
+      font-weight: 400;
+      letter-spacing: -0.022em;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    header {
+      padding: 80px 0 20px;
+      text-align: center;
+    }
+    
+    h1 {
+      font-size: 48px;
+      line-height: 1.08349;
+      font-weight: 700;
+      letter-spacing: -0.003em;
+      margin-bottom: 12px;
+      background: linear-gradient(90deg, #fff 0%, #f5f5f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    header p {
+      font-size: 21px;
+      line-height: 1.381;
+      font-weight: 400;
+      letter-spacing: 0.011em;
+      color: var(--apple-gray-400);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .demo-section {
+      margin: 40px 0 80px;
+    }
+    
+    .section-title {
+      font-size: 32px;
+      line-height: 1.125;
+      font-weight: 600;
+      letter-spacing: 0.004em;
+      margin-bottom: 40px;
+      text-align: center;
+      background: linear-gradient(90deg, #fff 0%, #f5f5f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .demo-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    
+    .demo-card {
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    }
+    
+    .demo-card:hover {
+      transform: translateY(-8px);
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+    
+    .card-content {
+      padding: 32px 24px;
+    }
+    
+    .card-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      background: linear-gradient(90deg, #fff 0%, #d2d2d7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .card-description {
+      font-size: 17px;
+      line-height: 1.47059;
+      color: var(--apple-gray-400);
+      margin-bottom: 24px;
+    }
+    
+    .demo-link {
+      display: inline-block;
+      background-color: var(--apple-blue);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 17px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .demo-link:hover {
+      background-color: var(--apple-blue-dark);
+      transform: scale(1.05);
+    }
+    
+    .poster-section {
+      margin: 40px 0 80px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+    }
+    
+    .poster-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      transition: transform 0.5s ease;
+      cursor: pointer;
+    }
+    
+    .poster-wrapper:hover {
+      transform: scale(1.01);
+    }
+    
+    .poster-image {
+      width: 100%;
+      display: block;
+      border-radius: 24px;
+      transition: filter 0.5s ease;
+    }
+    
+    .poster-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    
+    .poster-wrapper:hover .poster-overlay {
+      opacity: 1;
+    }
+    
+    .poster-wrapper:hover .poster-image {
+      filter: brightness(0.7);
+    }
+    
+    .view-button {
+      background-color: rgba(255,255,255,0.1);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      color: white;
+      border: none;
+      padding: 16px 32px;
+      border-radius: 30px;
+      font-size: 17px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .view-button:hover {
+      background-color: rgba(255,255,255,0.2);
+      transform: scale(1.05);
+    }
+    
+    .fullscreen-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .fullscreen-modal.active {
+      display: flex;
+      opacity: 1;
+    }
+    
+    .modal-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+    }
+    
+    .fullscreen-image {
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: 8px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+    
+    .close-button {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 32px;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
+    }
+    
+    .close-button:hover {
+      transform: scale(1.1);
+    }
+    
+    .section-subtitle {
+      text-align: center;
+      font-size: 21px;
+      color: var(--apple-gray-400);
+      margin-bottom: 30px;
+    }
+    
+    footer {
+      margin-top: 80px;
+      padding: 40px 0;
+      text-align: center;
+      color: var(--apple-gray-400);
+      font-size: 14px;
+      letter-spacing: -0.016em;
+      line-height: 1.42859;
+    }
+    
+    footer .credits {
+      margin-top: 8px;
+      color: var(--apple-gray-300);
+    }
+    
+    /* Team section styles */
+    .team-section {
+      margin: 80px 0;
+    }
+    
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      margin-top: 50px;
+    }
+    
+    .team-member {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .member-image-container {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 20px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      border: 4px solid rgba(255, 255, 255, 0.1);
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+      padding: 4px;
+    }
+    
+    .team-member:hover .member-image-container {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      border-color: var(--apple-accent);
+    }
+    
+    .member-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      transition: filter 0.5s ease;
+    }
+    
+    .team-member:hover .member-image {
+      filter: brightness(1.1);
+    }
+    
+    .member-name {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      background: linear-gradient(90deg, #fff 0%, #e8e8ed 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .member-role {
+      font-size: 15px;
+      color: var(--apple-gray-400);
+      letter-spacing: 0.01em;
+    }
+    
+    @media (max-width: 768px) {
+      header {
+        padding: 60px 0 20px;
+      }
+      
+      h1 {
+        font-size: 32px;
+      }
+      
+      header p {
+        font-size: 17px;
+      }
+      
+      .poster-section {
+        margin: 30px 0 60px;
+      }
+      
+      .demo-section {
+        margin: 30px 0 60px;
+      }
+      
+      .section-title {
+        font-size: 28px;
+      }
+      
+      .demo-cards {
+        grid-template-columns: 1fr;
+      }
+      
+      .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+      
+      .member-image-container {
+        width: 120px;
+        height: 120px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>Multimodal Sarcasm Detection Using Vision Language Models</h1>
+      <p>Exploring the nuances of sarcasm through advanced vision-language models</p>
+    </header>
+    
+    <section class="demo-section">
+      <h2 class="section-title">Experience Sarcasm Detection</h2>
+      
+      <div class="demo-cards">
+        <div class="demo-card">
+          <div class="card-content">
+            <h3 class="card-title">Direct Detection</h3>
+            <p class="card-description">Try our BLIP model that detects sarcasm without explicit reasoning steps.</p>
+            <a href="https://huggingface.co/spaces/manik063/blip-non-reasoning" target="_blank" class="demo-link">Try BLIP Model</a>
+          </div>
+        </div>
+        
+        <div class="demo-card">
+          <div class="card-content">
+            <h3 class="card-title">Reasoning-Based</h3>
+            <p class="card-description">Experience our Qwen-3B model that explains its sarcasm detection process.</p>
+            <a href="https://huggingface.co/spaces/manik063/qwen-3b-reasoning" target="_blank" class="demo-link">Try Qwen-3B</a>
+          </div>
+        </div>
+        
+        <div class="demo-card">
+          <div class="card-content">
+            <h3 class="card-title">Gemini Vision</h3>
+            <p class="card-description">Explore Google's Gemini model applied to multimodal sarcasm detection.</p>
+            <a href="https://huggingface.co/spaces/manik063/my_vlm" target="_blank" class="demo-link">Try Gemini</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="poster-section">
+      <h2 class="section-title">Project Poster</h2>
+      <p class="section-subtitle">Click to view our research poster in full screen</p>
+      <div class="poster-wrapper" id="poster-trigger">
+        <img src="Draft 404-Not-Found-Poster.png" alt="Project Poster" class="poster-image">
+        <div class="poster-overlay">
+          <button class="view-button">View Full Poster</button>
+        </div>
+      </div>
+    </section>
+    
+    <div class="fullscreen-modal" id="poster-modal">
+      <div class="modal-content">
+        <button class="close-button" id="close-modal">&times;</button>
+        <img src="Draft 404-Not-Found-Poster.png" alt="Project Poster" class="fullscreen-image">
+      </div>
+    </div>
+    
+    <section class="team-section">
+      <h2 class="section-title">Developed By</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="member-image-container">
+            <img src="arun.png" alt="Arunachalam Manikandan" class="member-image">
+          </div>
+          <h3 class="member-name">Arunachalam Manikandan</h3>
+          <p class="member-role">Lead Researcher</p>
+        </div>
+        
+        <div class="team-member">
+          <div class="member-image-container">
+            <img src="saeid.png" alt="Saeid Cheshmi" class="member-image">
+          </div>
+          <h3 class="member-name">Saeid Cheshmi</h3>
+          <p class="member-role">ML Engineer</p>
+        </div>
+        
+        <div class="team-member">
+          <div class="member-image-container">
+            <img src="erina.png" alt="Erina Karati" class="member-image">
+          </div>
+          <h3 class="member-name">Erina Karati</h3>
+          <p class="member-role">Data Scientist</p>
+        </div>
+        
+        <div class="team-member">
+          <div class="member-image-container">
+            <img src="hahnemann.png" alt="Hahnemann Ortiz" class="member-image">
+          </div>
+          <h3 class="member-name">Hahnemann Ortiz</h3>
+          <p class="member-role">NLP Specialist</p>
+        </div>
+      </div>
+    </section>
+    
+    <footer>
+      <p>© 2025 Multimodal Sarcasm Detection Project</p>
+    </footer>
+  </div>
+  
+  <script>
+    // Modal functionality
+    const posterTrigger = document.getElementById('poster-trigger');
+    const modal = document.getElementById('poster-modal');
+    const closeButton = document.getElementById('close-modal');
+    
+    posterTrigger.addEventListener('click', () => {
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Prevent scrolling
+    });
+    
+    closeButton.addEventListener('click', () => {
+      modal.classList.remove('active');
+      document.body.style.overflow = ''; // Re-enable scrolling
+    });
+    
+    // Also close modal when clicking outside the image
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
+</body>
+</html>
