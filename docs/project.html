@@ -278,6 +278,223 @@
       color: var(--apple-gray-300);
     }
     
+    /* Research content styles */
+    .research-content {
+      margin: 80px 0;
+    }
+    
+    .content-container {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 24px;
+      padding: 60px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .section-divider {
+      display: flex;
+      align-items: center;
+      margin: 40px 0;
+    }
+    
+    .section-divider .line {
+      flex-grow: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%);
+    }
+    
+    .section-divider span {
+      padding: 0 20px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--apple-gray-400);
+      font-weight: 600;
+    }
+    
+    .research-section {
+      margin-bottom: 60px;
+    }
+    
+    .research-title {
+      font-size: 28px;
+      margin-bottom: 24px;
+      font-weight: 600;
+      background: linear-gradient(90deg, #fff 0%, #d2d2d7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .research-text {
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--apple-gray-300);
+      margin-bottom: 20px;
+    }
+    
+    .method-section {
+      margin: 60px 0;
+    }
+    
+    .method-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-top: 30px;
+    }
+    
+    .method-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 30px;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .method-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.07);
+    }
+    
+    .method-icon {
+      width: 50px;
+      height: 50px;
+      background: rgba(6, 204, 204, 0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    
+    .method-icon .icon {
+      width: 28px;
+      height: 28px;
+      color: var(--apple-accent);
+    }
+    
+    .method-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      background: linear-gradient(90deg, #fff 0%, #d2d2d7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .method-description {
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--apple-gray-400);
+    }
+    
+    .results-section {
+      margin: 60px 0;
+    }
+    
+    .results-table-container {
+      margin: 30px 0;
+      overflow: hidden;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .table-scroll-container {
+      overflow-x: auto;
+      padding: 10px;
+    }
+    
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    
+    .results-table th {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--apple-white);
+      font-weight: 600;
+      text-align: center;
+      padding: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .results-table td {
+      padding: 12px 15px;
+      text-align: center;
+      color: var(--apple-gray-300);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .results-table tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .results-table tr:hover td {
+      background: rgba(255, 255, 255, 0.03);
+    }
+    
+    .findings {
+      margin-top: 40px;
+    }
+    
+    .findings-title {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, #fff 0%, #d2d2d7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .findings-list {
+      list-style: none;
+    }
+    
+    .findings-list li {
+      display: flex;
+      margin-bottom: 15px;
+      align-items: flex-start;
+    }
+    
+    .findings-bullet {
+      display: block;
+      min-width: 8px;
+      height: 8px;
+      background: var(--apple-accent);
+      border-radius: 50%;
+      margin-top: 8px;
+      margin-right: 15px;
+    }
+    
+    .findings-text {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--apple-gray-300);
+    }
+    
+    .conclusion-section {
+      margin-top: 60px;
+    }
+    
+    @media (max-width: 1024px) {
+      .content-container {
+        padding: 40px;
+      }
+      
+      .method-cards {
+        grid-template-columns: 1fr;
+      }
+      
+      .research-title {
+        font-size: 24px;
+      }
+    }
+
     /* Team section styles */
     .team-section {
       margin: 80px 0;
@@ -344,48 +561,32 @@
     }
     
     @media (max-width: 768px) {
-      header {
-        padding: 60px 0 20px;
+      .content-container {
+        padding: 30px;
       }
       
-      h1 {
-        font-size: 32px;
+      .research-title {
+        font-size: 22px;
       }
       
-      header p {
-        font-size: 17px;
+      .research-text {
+        font-size: 15px;
       }
       
-      .poster-section {
-        margin: 30px 0 60px;
-      }
-      
-      .demo-section {
-        margin: 30px 0 60px;
-      }
-      
-      .section-title {
-        font-size: 28px;
-      }
-      
-      .demo-cards {
-        grid-template-columns: 1fr;
-      }
-      
-      .team-grid {
-        grid-template-columns: repeat(2, 1fr);
+      .method-cards {
         gap: 20px;
       }
       
-      .member-image-container {
-        width: 120px;
-        height: 120px;
+      .method-card {
+        padding: 20px;
       }
-    }
-    
-    @media (max-width: 480px) {
-      .team-grid {
-        grid-template-columns: 1fr;
+      
+      .findings-title {
+        font-size: 20px;
+      }
+      
+      .findings-text {
+        font-size: 15px;
       }
     }
   </style>
@@ -394,7 +595,7 @@
 <body>
   <div class="container">
     <header>
-      <h1>Multimodal Sarcasm Detection Using Vision Language Models</h1>
+      <h1>Multimodal Sarcasm Detection Using Vision Language Model</h1>
       <p>Exploring the nuances of sarcasm through advanced vision-language models</p>
     </header>
     
@@ -423,6 +624,164 @@
             <h3 class="card-title">Gemini Vision</h3>
             <p class="card-description">Explore Google's Gemini model applied to multimodal sarcasm detection.</p>
             <a href="https://huggingface.co/spaces/manik063/my_vlm" target="_blank" class="demo-link">Try Gemini</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="research-content">
+      <div class="content-container">
+        <div class="section-divider">
+          <div class="line"></div>
+          <span>Research Overview</span>
+          <div class="line"></div>
+        </div>
+        
+        <div class="research-section">
+          <h2 class="research-title">Introduction & Motivation</h2>
+          <p class="research-text">
+            We aim to detect sarcasm using vision-language models (VLMs) that can accurately interpret the intended meaning conveyed by images and text. Detecting sarcasm is a significant challenge for humans and machines, as it relies heavily on context, tone, and cultural nuances.
+          </p>
+          <p class="research-text">
+            Recent studies have shown that even advanced language models struggle with sarcasm detection across multiple benchmarks, despite human annotation, pre-trained language models, and structured prompting methods, highlighting the complexity of this task, specifically when models rely only on textual inputs.
+          </p>
+        </div>
+        
+        <div class="research-section method-section">
+          <h2 class="research-title">Method</h2>
+          <div class="method-cards">
+            <div class="method-card">
+              <div class="method-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon">
+                  <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M3 16V8C3 5.23858 5.23858 3 8 3H16C18.7614 3 21 5.23858 21 8V16C21 18.7614 18.7614 21 16 21H8C5.23858 21 3 18.7614 3 16Z" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M17.5 6.5H17.51" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h3 class="method-title">Vision-Language Model</h3>
+              <p class="method-description">
+                We select three VLMs: BLIP, Qwen2.5-VL-3B, and Qwen2.5-VL-7B. Each model undergoes supervised fine-tuning (SFT) using QLoRA via the Unsloth library on the MMSD training set with approximately 25,000 image-text pairs annotated with binary labels.
+              </p>
+            </div>
+            
+            <div class="method-card">
+              <div class="method-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon">
+                  <path d="M22 12H2M22 12C22 17.5228 17.5228 22 12 22M22 12C22 6.47715 17.5228 2 12 2M2 12C2 17.5228 6.47715 22 12 22M2 12C2 6.47715 6.47715 2 12 2M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22M12 2C9.49872 4.73835 8.07725 8.29203 8 12C8.07725 15.708 9.49872 19.2616 12 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h3 class="method-title">Reasoning Vision-Language Model</h3>
+              <p class="method-description">
+                We bring reasoning capability to each model through model distillation using a large open-source VLM (LLaMA-90B Vision) to generate reasoning steps for the MMSD training samples and fine-tune each model on this reasoning dataset.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="research-section results-section">
+          <h2 class="research-title">Evaluation & Results</h2>
+          <p class="research-text">
+            We assess and compare each fine-tuned model against the original using zero-shot prompting to evaluate label prediction and reasoning. Furthermore, we benchmark our models against the closed-source VLM Gemini 2.0 Flash.
+          </p>
+          
+          <div class="results-table-container">
+            <div class="table-scroll-container">
+              <table class="results-table">
+                <thead>
+                  <tr>
+                    <th rowspan="2">Metric</th>
+                    <th colspan="3">VLM</th>
+                    <th colspan="3">Reasoning VLM</th>
+                    <th>Closed-source</th>
+                  </tr>
+                  <tr>
+                    <th>BLIP</th>
+                    <th>Qwen2.5-VL-3B</th>
+                    <th>Qwen2.5-VL-7B</th>
+                    <th>BLIP</th>
+                    <th>Qwen2.5-VL-3B</th>
+                    <th>Qwen2.5-VL-7B</th>
+                    <th>Gemini 2.0</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Accuracy</td>
+                    <td>68.73%</td>
+                    <td>82.02%</td>
+                    <td>82.66%</td>
+                    <td>75.48%</td>
+                    <td>83.91%</td>
+                    <td>85.70%</td>
+                    <td>63.54%</td>
+                  </tr>
+                  <tr>
+                    <td>Recall</td>
+                    <td>0.61</td>
+                    <td>0.71</td>
+                    <td>0.89</td>
+                    <td>0.71</td>
+                    <td>0.81</td>
+                    <td>0.84</td>
+                    <td>0.62</td>
+                  </tr>
+                  <tr>
+                    <td>Precision</td>
+                    <td>0.56</td>
+                    <td>0.69</td>
+                    <td>0.72</td>
+                    <td>0.701</td>
+                    <td>0.75</td>
+                    <td>0.79</td>
+                    <td>0.66</td>
+                  </tr>
+                  <tr>
+                    <td>F1</td>
+                    <td>0.58</td>
+                    <td>0.70</td>
+                    <td>0.80</td>
+                    <td>0.712</td>
+                    <td>0.77</td>
+                    <td>0.81</td>
+                    <td>0.61</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <div class="findings">
+            <h3 class="findings-title">Key Findings</h3>
+            <ul class="findings-list">
+              <li>
+                <span class="findings-bullet"></span>
+                <span class="findings-text">Fine-tuning VLMs significantly enhances performance in detecting sarcasm compared to using zero-shot prompting.</span>
+              </li>
+              <li>
+                <span class="findings-bullet"></span>
+                <span class="findings-text">Among the models tested, Qwen2.5-VL-7B with reasoning fine-tuning achieves the highest performance, with an F1 score of 0.81 and an accuracy of 85.70%.</span>
+              </li>
+              <li>
+                <span class="findings-bullet"></span>
+                <span class="findings-text">Incorporating reasoning traces through model distillation leads to consistent performance across all models, outperforming their base versions and the closed-source Gemini 2.0 Flash model.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="research-section conclusion-section">
+          <h2 class="research-title">Conclusions</h2>
+          <p class="research-text">
+            While our fine-tuned models show substantial improvements over zero-shot baselines, several limitations remain. The models still demonstrate a trade-off between recall and precision, particularly in zero-shot settings, indicating challenges in confidently identifying sarcasm without explicit fine-tuning.
+          </p>
+          <p class="research-text">
+            Additionally, the quality of reasoning traces used for distillation depends heavily on the performance of the teacher model (LLaMA-90B Vision), which may introduce biases or reinforce incorrect reasoning patterns. Furthermore, our evaluation is primarily limited to the MMSD dataset, and broader generalization remains to be validated.
+          </p>
+          
+          <div class="section-divider">
+            <div class="line"></div>
+            <span>Try Our Models</span>
+            <div class="line"></div>
           </div>
         </div>
       </div>
