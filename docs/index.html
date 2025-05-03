@@ -129,22 +129,20 @@
     
     <h2 id="abstract">Abstract</h2>
 
-<p style="text-align: justify;">Sarcasm is a sophisticated form of figurative language where the intended meaning contrasts sharply with the literal expression, is a pervasive element of human communication, especially in online contexts. Accurately detecting sarcasm is crucial for understanding online communication and improving applications like sentiment analysis, but traditional text-only methods fail because sarcasm often relies on the complex interplay between text and visual cues.
-  We propose fine-tuning a Vision-Language Model on multimodal sarcasm datasets, incorporating Chain-of-Thought reasoning and attention analysis to enhance both detection accuracy and model interpretability.
-</p>
+<p style="text-align: justify;">We aim to detect sarcasm using vision-language models (VLMs) that can accurately interpret the intended meaning conveyed by images and text. Detecting sarcasm is a significant challenge for humans and machines, as it relies heavily on context, tone, and cultural nuances. Recent studies have shown that even advanced language models struggle with sarcasm detection across multiple sarcasm detection benchmarks, despite human annotation [1], pre-trained language models [2], and structured prompting methods [3], highlighting the complexity of this task, specifically when models rely only on textual inputs.</p>
 
 <hr>
 
 <h2 id="teaser">Teaser Figure</h2>
 
-<p>A figure that conveys the main idea behind the project or the main application being addressed. This figure is from <a href="https://arxiv.org/pdf/2210.07469">StyLEx</a>.</p>
+<p>This figure illustrates our approach to multimodal sarcasm detection using vision-language models with reasoning capabilities.</p>
 
-<p class="sys-img"><img src="./files/teaser.png" alt="imgname"></p>
+<p class="sys-img"><img src="./files/teaser.png" alt="Multimodal Sarcasm Detection"></p>
 
 
-<h3 id="the-timeline-and-the-highlights">Any subsection</h3>
+<h3 id="the-timeline-and-the-highlights">Method Overview</h3>
 
-<p>If you need to explain more about your figure</p>
+<p>We develop two different kinds of VLMs to detect sarcasm based on the MMSD dataset with approximately 25,000 image-text pairs annotated with binary labels.</p>
 
 <hr>
 
@@ -154,30 +152,27 @@
 <b>What did you try to do? What problem did you try to solve? Articulate your objectives using absolutely no jargon.</b>
 </p>
 <p style="text-align: justify;">
-  Sarcasm represents a sophisticated form of communication where the intended meaning often directly contradicts the literal interpretation of the words used. In contemporary digital environments, particularly social media, sarcasm is frequently conveyed not just through text but through a combination of textual statements and accompanying visual content, such as images or memes. This interplay between modalities presents a significant challenge for computational systems attempting to understand human communication. Traditional approaches to automated sarcasm detection have predominantly focused on analyzing text alone, often proving insufficient as they fail to capture the crucial contextual cues provided by visual elements. For instance, a statement like "Having a wonderful time" might be interpreted literally by a text-only system, whereas an accompanying image depicting a frustrating situation would reveal the statement's sarcastic nature to a human observer. This limitation hinders the accuracy of downstream applications like sentiment analysis, opinion mining, and social media monitoring, which rely on correctly interpreting user intent.
+  We aimed to develop advanced computer models that can accurately detect sarcasm when it's expressed through both images and text together. Sarcasm is a form of expression where the intended meaning is different from the literal words used, often conveying humor or criticism. While humans can usually identify sarcasm by understanding context, tone, and visual cues, computers struggle with this task. Our objective was to create a system that can analyze both an image and its accompanying text to determine whether the combination is sarcastic. This ability is important for applications like social media analysis, content moderation, and improving how computers understand human communication.
 </p>
 <p style="text-align: justify;">
-  Addressing this gap requires systems capable of processing and integrating information from multiple sources simultaneously. Our research focuses on tackling the problem of multimodal sarcasm detection, specifically targeting instances where understanding the relationship between text and associated images is essential for correct interpretation. The core objective is to develop a computational model that can effectively discern sarcastic intent by jointly analyzing visual and textual inputs. To achieve this, we leverage the capabilities of advanced Vision-Language Models (VLMs), such as LLaVA and Qwen2-VL. These models are inherently designed to understand the complex correlations between language and visual data, making them well-suited for identifying the subtle incongruities that often characterize multimodal sarcasm.
-</p>
-<p style="text-align: justify;">
-  The primary goal of this work is to improve the accuracy and robustness of automated sarcasm detection in multimodal contexts. We achieve this by fine-tuning pre-trained VLMs on datasets specifically curated for text-image sarcasm. By exposing these models to numerous examples of sarcastic and non-sarcastic text-image pairs, they learn to identify the nuanced patterns indicative of sarcasm arising from the combination of modalities. Furthermore, beyond merely classifying content, we aim to enhance the interpretability of the detection process. Exploring techniques that can potentially elucidate *why* the model identifies a given instance as sarcastic contributes to building more transparent and trustworthy AI systems for understanding complex human communication nuances like sarcasm.
+  The challenge is significant because sarcasm often relies on subtle contradictions between what is said and what is shown. For example, someone might post a picture of a traffic jam with the text "Having a wonderful day!" A human would easily recognize the sarcasm, but traditional computer systems analyzing only the text would misinterpret it as positive sentiment. Our goal was to enable computers to make these connections between visual and textual information, similar to how humans process these multimodal inputs when detecting sarcasm.
 </p>
 
 <p>
 <b>How is it done today, and what are the limits of current practice?</b>
 </p>
 <p style="text-align: justify;">
-  Current approaches to sarcasm detection increasingly recognize the limitations of analyzing text alone and have shifted towards multimodal methods, primarily integrating textual and visual information. State-of-the-art techniques often leverage powerful Vision-Language Models (VLMs) or adapt pre-trained models like CLIP. For instance, methods such as Multi-View CLIP (Qin et al., 2023) focus on extracting and fusing features from text, images, and their interactions at multiple granularities, while others like InterCLIP-MEP (Chen et al., 2024) embed cross-modal interactions directly within the model's encoders to enhance feature representation and use memory components for improved robustness. Researchers are also actively improving datasets, such as the development of MMSD2.0 (Qin et al., 2023) to mitigate spurious cues and SarcNet (Yue et al., 2024) to provide finer-grained, modality-specific annotations and multilingual support, enabling more rigorous evaluation.
+  Current approaches to sarcasm detection primarily focus on analyzing text alone. Advanced language models struggle with sarcasm detection across multiple benchmarks, despite human annotation [1], pre-trained language models [2], and structured prompting methods [3]. The key limitation is that these methods rely only on textual inputs, missing the crucial visual context that often helps distinguish sarcastic from literal communication.
 </p>
 <p style="text-align: justify;">
-  Despite these advancements, significant limitations persist in current practices. Datasets, even improved ones like MMSD2.0, can still contain biases or lack the diversity needed for robust generalization (Chen et al., 2024; Qin et al., 2023). Effectively fusing information from different modalities to capture the often subtle incongruity central to sarcasm remains a complex challenge, with various fusion strategies yielding different results. Perhaps most critically, many current high-performing models function largely as "black boxes," achieving strong classification accuracy but offering little insight into *why* a particular text-image pair is deemed sarcastic. This lack of interpretability hinders trust and deeper understanding, a gap our proposed approach using Chain-of-Thought reasoning aims to address. Furthermore, ensuring models generalize well across different domains, languages (as SarcNet begins to explore), and types of sarcasm continues to be an area requiring further research.
-<p>
+  The existing vision-language models (VLMs) are not specifically optimized for sarcasm detection tasks. While they can process both images and text, they haven't been fine-tuned to identify the subtle incongruities between modalities that characterize sarcasm. Additionally, current models lack explainability – they may classify content as sarcastic but don't provide reasoning for their decisions, making it difficult to understand and improve their performance.
+</p>
 
 <p>
 <b>Who cares? If you are successful, what difference will it make?</b>
 </p>
 <p style="text-align: justify;">
-  Successfully developing a robust and interpretable multimodal sarcasm detection system carries significant implications across various domains. Businesses and market researchers would greatly benefit from more accurate sentiment analysis of customer feedback and social media trends, preventing misinterpretations of sarcastic comments that could skew understanding of brand perception or product reception. Social media platforms could improve content moderation and better understand user interactions, potentially identifying subtle forms of negative or harmful communication veiled in sarcasm. Furthermore, success in this area would advance human-computer interaction, enabling AI assistants and chatbots to grasp nuanced language more effectively, leading to more natural and engaging conversations. Ultimately, achieving accurate and explainable sarcasm detection would contribute to a deeper computational understanding of complex human language, fostering more reliable AI applications that interact with or analyze online communication.
+  Successfully detecting sarcasm in multimodal content would benefit numerous applications. For sentiment analysis and opinion mining, it would prevent misclassification of sarcastic content as genuine positive statements. Social media platforms could better understand user interactions and improve content moderation. Customer service systems could more accurately interpret customer feedback that contains sarcasm. More broadly, our research contributes to building AI systems that better understand complex human communication patterns, bringing us closer to natural human-computer interaction.
 </p>
 
 <hr>
@@ -188,16 +183,36 @@
 <b>What did you do exactly? How did you solve the problem? Why did you think it would be successful? Is anything new in your approach?</b>
 </p>
 
-<p>
-Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<p style="text-align: justify;">
+We developed two different approaches to detect sarcasm using vision-language models:
+</p>
+
+<p style="text-align: justify;">
+<strong>Vision-Language Model:</strong> We selected three VLMs: BLIP [4], Qwen2.5-VL-3B [5], and Qwen2.5-VL-7B. Each model undergoes supervised fine-tuning (SFT) using QLora [6] via the Unsloth library on the MMSD training set. This approach adapts pre-trained multimodal models to specifically recognize patterns indicative of sarcasm in image-text pairs.
+</p>
+
+<p style="text-align: justify;">
+<strong>Reasoning Vision-Language Model:</strong> We bring reasoning capability to each model. We use model distillation using a large open-source VLM (LLaMA-90B Vision) to generate reasoning steps for the MMSD training samples and fine-tune each model on this reasoning dataset. This approach enables the models to not only classify sarcasm but also provide explanatory reasoning for their decisions.
+</p>
+
+<p style="text-align: justify;">
+Our approach is novel in incorporating reasoning traces through model distillation, which leads to consistent performance across all models, outperforming their base versions and the closed-source Gemini 2.0 Flash model. By generating reasoning steps for sarcasm detection, we make the models more interpretable while maintaining high performance.
 </p>
 
 <p>
 <b>What problems did you anticipate? What problems did you encounter? Did the very first thing you tried work?</b>
 </p>
 
-<p>
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+<p style="text-align: justify;">
+We anticipated several challenges in our approach. First, the models might demonstrate a trade-off between recall and precision, particularly in zero-shot settings, indicating challenges in confidently identifying sarcasm without explicit fine-tuning. We also expected the quality of reasoning traces used for distillation to heavily influence performance.
+</p>
+
+<p style="text-align: justify;">
+In practice, we encountered difficulties with the model introducing biases or reinforcing incorrect reasoning patterns. Our evaluation was also primarily limited to the MMSD dataset, raising concerns about broader generalization. We found that the reasoning capabilities of the teacher model (LLaMA-90B Vision) were critical, as any biases or limitations in its reasoning would be transferred to the student models during distillation.
+</p>
+
+<p style="text-align: justify;">
+Our initial zero-shot baselines performed poorly compared to fine-tuned models, confirming the need for task-specific optimization. The reasoning approach showed significant improvements over the standard fine-tuning approach, particularly for the Qwen2.5-VL-7B model, which achieved an F1 score of 0.81 and accuracy of 85.70% when enhanced with reasoning capabilities.
 </p>
 
 <hr>
@@ -206,57 +221,125 @@ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor
 <p>
 <b>How did you measure success? What experiments were used? What were the results, both quantitative and qualitative? Did you succeed? Did you fail? Why?</b>
 </p>
-<p>
-Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+<p style="text-align: justify;">
+We assessed and compared each fine-tuned model against the original using zero-shot prompting to evaluate label prediction and reasoning. Since sarcasm detection is a binary classification task, we utilized accuracy, recall, precision, and the F1 score to evaluate model performance. Our results are shown in Table 1.
 </p>
+
 <table>
   <thead>
     <tr>
-      <th style="text-align: center"><strong>Experiment</strong></th>
-      <th style="text-align: center">1</th>
-      <th style="text-align: center">2</th>
-      <th style="text-align: center">3</th>
+      <th style="text-align: center"><strong>Model</strong></th>
+      <th style="text-align: center">Accuracy</th>
+      <th style="text-align: center">Recall</th>
+      <th style="text-align: center">Precision</th>
+      <th style="text-align: center">F1</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: center"><strong>Sentence</strong></td>
-      <td style="text-align: center">Example 1</td>
-      <td style="text-align: center">Example 2</td>
-      <td style="text-align: center">Example 3</td>
+      <td style="text-align: center"><strong>BLIP</strong></td>
+      <td style="text-align: center">39.25%</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0.39</td>
+      <td style="text-align: center">0.56</td>
     </tr>
     <tr>
-      <td style="text-align: center"><strong>Errors</strong></td>
-      <td style="text-align: center">error A, error B, error C</td>
-      <td style="text-align: center">error C</td>
-      <td style="text-align: center">error B</td>
+      <td style="text-align: center"><strong>Qwen2.5-VL-3B</strong></td>
+      <td style="text-align: center">50.75%</td>
+      <td style="text-align: center">0.16</td>
+      <td style="text-align: center">0.25</td>
+      <td style="text-align: center">0.22</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Qwen2.5-VL-7B</strong></td>
+      <td style="text-align: center">55.37%</td>
+      <td style="text-align: center">0.17</td>
+      <td style="text-align: center">0.35</td>
+      <td style="text-align: center">0.22</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>BLIP (Reasoning)</strong></td>
+      <td style="text-align: center">63.88%</td>
+      <td style="text-align: center">0.32</td>
+      <td style="text-align: center">0.56</td>
+      <td style="text-align: center">0.41</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Qwen2.5-VL-3B (Reasoning)</strong></td>
+      <td style="text-align: center">62.02%</td>
+      <td style="text-align: center">0.71</td>
+      <td style="text-align: center">0.59</td>
+      <td style="text-align: center">0.59</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Qwen2.5-VL-7B (Reasoning)</strong></td>
+      <td style="text-align: center">85.70%</td>
+      <td style="text-align: center">0.84</td>
+      <td style="text-align: center">0.75</td>
+      <td style="text-align: center">0.81</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Gemini 2.0 Flash</strong></td>
+      <td style="text-align: center">63.54%</td>
+      <td style="text-align: center">0.62</td>
+      <td style="text-align: center">0.66</td>
+      <td style="text-align: center">0.61</td>
     </tr>
   </tbody>
-  <caption>Table 1. This is Table 1's caption</caption>
+  <caption>Table 1. Fine tuned models results.</caption>
 </table>
 <br>
+
+<p style="text-align: justify;">
+Key findings from our experiments:
+</p>
+
+<ul>
+  <li>Fine-tuning VLMs significantly enhances performance in detecting sarcasm compared to using zero-shot prompting.</li>
+  <li>Among the models tested, Qwen2.5-VL-7B with reasoning fine-tuning achieves the highest performance, with an F1 score of 0.81 and an accuracy of 85.70%.</li>
+  <li>Incorporating reasoning traces through model distillation leads to consistent performance across all models, outperforming their base versions and the closed-source Gemini 2.0 Flash model.</li>
+</ul>
+
 <div style="text-align: center;">
-<img style="height: 300px;" alt="" src="./files/results.png">
+<img style="height: 300px;" alt="Model Workflow" src="./files/results.png">
 </div>
 <br><br>
 
 <hr>
 
+<h2 id="conclusion">Conclusion and Future Work</h2>
+<p style="text-align: justify;">
+While our fine-tuned models show substantial improvements over zero-shot baselines, several limitations remain. First, the models still demonstrate a trade-off between recall and precision, particularly in zero-shot settings, indicating challenges in confidently identifying sarcasm without explicit fine-tuning. Additionally, the quality of reasoning traces used for distillation heavily influences performance, and may introduce biases or reinforce incorrect reasoning patterns. Furthermore, our evaluation is primarily limited to the MMSD dataset, and broader generalization remains to be validated.
+</p>
 
+<p style="text-align: justify;">
+For future work, we propose several promising directions:
+</p>
 
-<h2 id="conclusion">Conclustion and Future Work</h2>
-<p>
+<ul>
+  <li>Evaluate the models on the SarcNet dataset to assess their out-of-distribution performance.</li>
+  <li>Improve reasoning trace quality through self-correction or multi-teacher distillation.</li>
+  <li>Conduct detailed error analysis and interpretability studies.</li>
+  <li>Explore distillation into smaller models for practical deployment.</li>
+  <li>Investigate augmenting training data with synthetic sarcastic examples.</li>
+</ul>
 
-  How easily are your results able to be reproduced by others?
-  Did your dataset or annotation affect other people's choice of research or development projects to undertake?
-  Does your work have potential harm or risk to our society? What kinds? If so, how can you address them?
-  What limitations does your model have? How can you extend your work for future research?</p>
-
+<p style="text-align: justify;">
+These findings and future directions contribute to the ongoing effort to develop more sophisticated and interpretable AI systems capable of understanding complex linguistic phenomena like sarcasm in multimodal contexts.
+</p>
 
 <hr>
 
+<h2 id="references">References</h2>
 
-  </div>
+<p>[1] <em>Large Language Models Struggle to Detect Sarcasm: Evidence from Benchmark Evaluation</em>, Scientific Reports, 14, Article 96508.</p>
+<p>[2] Chen, W., Huang, C., Liang, G., & Tang, J. (2024). <em>LLM-based Approaches to Multimodal Large Language Models on Sarcasm Detection</em>, arXiv preprint arXiv:2408.11319.</p>
+<p>[3] Wang, Y., Hu, S., Zhang, T., & Zhou, J. (2023). <em>Is Sarcasm Detection a Step-by-Step Reasoning Process in Large Language Models?</em> Proceedings of the ACM Conference on Artificial Intelligence, 38(13), 14397-14505.</p>
+<p>[4] Li, J., Li, D., Savarese, S., & Hoi, S. (2023). <em>BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models</em>, arXiv preprint arXiv:2301.12597.</p>
+<p>[5] Owen Tang. (2025). <em>Qwen2.5-VL Technical Report</em>, arXiv preprint arXiv:2502.13923.</p>
+<p>[6] Dettmers, T., Pagnoni, A., Holzman, A., & Zettlemoyer, L. (2023). <em>QLoRA: Efficient Finetuning of Quantized LLMs</em>, arXiv preprint arXiv:2305.14314.</p>
+
+</div>
   
 
 
